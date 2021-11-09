@@ -1,0 +1,31 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      -master
+
+jobs:
+  ci-cd:
+    name: CI/CD
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: "Init repository"
+      uses: actions/checkout@v2
+
+    - name: "Setup Nodes"
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: "Setup Angular"
+      uses: actions/angular-github-actions@master
+
+    - name: "Install dependencies"
+      uses: npm install
+
+    - name: "Build App"
+      uses: npm run build
+
+
